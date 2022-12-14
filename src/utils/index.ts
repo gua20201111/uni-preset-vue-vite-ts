@@ -1,13 +1,13 @@
-export function getArrayRandom(array: any[] = [], num: number = 1) {
+export function getArrayRandom(array: any[] = [], num: number = 1, repeat: boolean = false) {
   if(!Array.isArray(array)) return []
-  if(num > array.length) return array
+  if(num > array.length && !repeat) return array
   const randomNumArray: number[] = []
   for(let i = 0; i < num; i ++) {
-    let intRandom = getIntRandom(num)
-    if(!randomNumArray.includes(intRandom)) {
-      randomNumArray.push(intRandom)
-    }else {
+    let intRandom = getIntRandom(array.length)
+    if(randomNumArray.includes(intRandom) && !repeat) {
       i --
+    }else {
+      randomNumArray.push(intRandom)
     }
   }
   return randomNumArray.map(v => array[v])
